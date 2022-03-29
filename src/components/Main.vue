@@ -3,13 +3,8 @@
     <div class="top">
       <Header />
     </div>
-
-    <div class="bottom">
-      <div class="right">
-        <div class="content">
-          <router-view />
-        </div>
-      </div>
+    <div class="body">
+      <router-view />
     </div>
   </main>
 </template>
@@ -55,7 +50,7 @@ $left-side-width = 80px
     margin-bottom 10px
   }
 
-  .bottom {
+  .body {
     position relative
     box-sizing border-box
     width 100%
@@ -70,23 +65,23 @@ $left-side-width = 80px
     //   box-sizing border-box
     // }
 
-    .right {
-      position relative
-      width 100%
-      height 100%
-      box-sizing border-box
-      padding 0 10px 10px 10px
+    // .right {
+    //   position relative
+    //   width 100%
+    //   height 100%
+    //   box-sizing border-box
+    //   padding 0 10px 10px 10px
 
-      .content {
-        position relative
-        width 100%
-        height 100%
-        background $background-color
-        border-radius 5px
-        box-sizing border-box
-        padding 10px
-      }
-    }
+    //   .content {
+    //     position relative
+    //     width 100%
+    //     height 100%
+    //     background $background-color
+    //     border-radius 5px
+    //     box-sizing border-box
+    //     padding 10px
+    //   }
+    // }
   }
 }
 

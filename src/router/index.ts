@@ -1,9 +1,15 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
+import Index from '@/views/home/index.vue'
 import Home from '@/views/Home.vue'
 import Vuex from '@/views/Vuex.vue'
 import Test from '@/views/Test.vue'
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Index',
+    component: Index
+  },
   {
     path: '/',
     name: 'Home',

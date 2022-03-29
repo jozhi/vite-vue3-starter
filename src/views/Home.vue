@@ -10,6 +10,7 @@
 import { defineComponent, onMounted, onUnmounted } from 'vue'
 
 import * as echarts from 'echarts'
+import { resetScreenSize } from '@/utils/resetScreenSize'
 
 export default defineComponent({
   name: 'Home',
@@ -62,6 +63,8 @@ export default defineComponent({
 
     onMounted(() => {
       initChart()
+
+      resetScreenSize()
     })
     onUnmounted(() => {
       // eslint-disable-next-line no-unused-expressions
