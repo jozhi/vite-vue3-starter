@@ -6,8 +6,8 @@
         <template #header>
           <div class="card-header">
             <span>XPoet</span>
-            <el-button class="button" type="text" @click="getUserInfo"
-              >点击获取XPoet信息
+            <el-button class="button" type="text" @click="getUserInfo">
+              点击获取XPoet信息
             </el-button>
           </div>
         </template>

@@ -2,10 +2,12 @@
   <Left />
   <Main />
   <Right />
+  <el-dialog class="dialog" v-model="dialogTableVisible" title="标题"> ~~~ </el-dialog>
+  <el-button class="button" @click="dialogTableVisible = true">test</el-button>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import Left from './leftPart.vue'
 import Main from './mainPart.vue'
 import Right from './rightPart.vue'
@@ -22,9 +24,30 @@ export default defineComponent({
     onMounted(() => {
       resetScreenSize()
     })
-    return {}
+    // dialogTableVisible
+    const reactiveData = reactive({
+      dialogTableVisible: false
+    })
+
+    return {
+      ...toRefs(reactiveData)
+    }
   }
 })
 </script>
 
-<style></style>
+<style>
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 400px;
+  height: 250px;
+}
+.button {
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+</style>

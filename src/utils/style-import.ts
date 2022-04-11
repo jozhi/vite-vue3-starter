@@ -1,5 +1,6 @@
 import { App } from 'vue'
 import {
+  ElDialog,
   ElIcon,
   ElLoading,
   ElCard,
@@ -15,10 +16,17 @@ import {
  * @param app {App}
  */
 export default function styleImport(app: App) {
-  ;[ElButton, ElCard, ElLoading, ElIcon, ElTable, ElTableColumn, ElPagination].forEach(
-    (v) => {
-      app.use(v)
-    }
-  )
+  ;[
+    ElDialog,
+    ElButton,
+    ElCard,
+    ElLoading,
+    ElIcon,
+    ElTable,
+    ElTableColumn,
+    ElPagination
+  ].forEach((v) => {
+    app.use(v)
+  })
   return app
 }
