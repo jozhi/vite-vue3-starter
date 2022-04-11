@@ -6,7 +6,13 @@ import {
   ElButton,
   ElTable,
   ElTableColumn,
-  ElPagination
+  ElPagination,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItemGroup,
+  ElMenuItem,
+  ElRadioGroup,
+  ElRadioButton
 } from 'element-plus'
 
 /**
@@ -15,10 +21,22 @@ import {
  * @param app {App}
  */
 export default function styleImport(app: App) {
-  ;[ElButton, ElCard, ElLoading, ElIcon, ElTable, ElTableColumn, ElPagination].forEach(
-    (v) => {
-      app.use(v)
-    }
-  )
+  ;[
+    ElButton,
+    ElCard,
+    ElLoading,
+    ElIcon,
+    ElTable,
+    ElTableColumn,
+    ElPagination,
+    ElMenu,
+    ElSubMenu,
+    ElMenuItemGroup,
+    ElMenuItem,
+    ElRadioGroup,
+    ElRadioButton
+  ].forEach((v) => {
+    app.use(v)
+  })
   return app
 }

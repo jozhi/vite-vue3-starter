@@ -10,6 +10,11 @@
       <ElTableColumn prop="name" label="姓名" width="180"> </ElTableColumn>
       <ElTableColumn prop="address" label="地址"> </ElTableColumn>
     </ElTable>
+    <ElTable :data="tableData" stripe style="width: 100%">
+      <ElTableColumn prop="date" label="日期" width="180"> </ElTableColumn>
+      <ElTableColumn prop="name" label="姓名" width="180"> </ElTableColumn>
+      <ElTableColumn prop="address" label="地址"> </ElTableColumn>
+    </ElTable>
     <ElPagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"

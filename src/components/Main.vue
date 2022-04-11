@@ -5,6 +5,9 @@
     </div>
 
     <div class="bottom">
+      <div class="navWrap">
+        <Nav />
+      </div>
       <div class="right">
         <div class="content">
           <router-view />
@@ -17,11 +20,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue'
+import Nav from '@/components/Nav.vue'
 
 export default defineComponent({
   name: 'Main',
   components: {
-    Header
+    Header,
+    Nav
   }
 })
 </script>
@@ -31,15 +36,15 @@ export default defineComponent({
 @import "../style/basic.styl"
 
 $top-height = 60px
-$left-side-width = 80px
+$left-side-width = 200px
 
 .main-container {
-  position absolute
-  left 0
-  right 0
-  top 0
-  bottom 0
-  width 100%
+  // position absolute
+  // left 0
+  // right 0
+  // top 0
+  // bottom 0
+  // width 100%
   height 100%
   background $second-background-color
   box-sizing border-box
@@ -52,6 +57,7 @@ $left-side-width = 80px
     box-sizing border-box
     width 100%
     height $top-height
+    min-height: $top-height;
     margin-bottom 10px
   }
 
@@ -62,6 +68,15 @@ $left-side-width = 80px
     height 100%
     display flex
     justify-content space-between
+    // height:
+
+    .navWrap{
+      width $left-side-width
+      // margin-right 10px
+      box-sizing: border-box
+      padding: 0 0 10px 10px
+      border-radius: 5px
+    }
 
     // .left {
     //   position relative

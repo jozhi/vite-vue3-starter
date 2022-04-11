@@ -6,24 +6,19 @@
     <!-- <div class="go-github" @click="goGitHub">
       <i class="icon el-icon-s-promotion"></i> GitHub
     </div> -->
-
-    <Nav />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import Nav from '@/components/Nav.vue'
 
 // eslint-disable-next-line no-unused-vars
 // const router = useRouter()
 
 export default defineComponent({
   name: 'Header',
-  components: {
-    Nav
-  },
+  components: {},
   setup() {
     const router = useRouter()
 
