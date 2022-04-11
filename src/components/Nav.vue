@@ -28,24 +28,14 @@ export default defineComponent({
     const reactiveData = reactive({
       navList: [
         {
-          name: 'Home',
+          name: 'Index',
           isActive: false,
           path: '/'
         },
         {
-          name: 'Vuex',
+          name: 'Home',
           isActive: false,
-          path: '/vuex'
-        },
-        {
-          name: 'Axios',
-          isActive: false,
-          path: '/axios'
-        },
-        {
-          name: 'Test',
-          isActive: false,
-          path: '/test'
+          path: '/Home'
         }
       ],
 
