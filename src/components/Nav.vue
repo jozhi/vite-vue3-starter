@@ -19,25 +19,41 @@
         @open="handleOpen"
         @close="handleClose"
       >
-        <el-sub-menu index="1">
+        <el-sub-menu v-for="(level1, i1) in menuData" :key="i1" :index="i1">
           <template #title>
             <el-icon><location /></el-icon>
-            <span>Navigator One</span>
+            <span>{{ level1.title }}</span>
           </template>
-          <el-menu-item-group>
-            <template #title><span>Group One</span></template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-          </el-menu-item-group>
+
+          <template v-if="level1.children && level1.children.length">
+            <el-menu-item-group v-for="(level2, i2) in level1.children" :key="i1 + i2">
+              <template #title>
+                <span>{{ level2.title }}</span>
+              </template>
+              <template v-if="level2.children && level2.children.length">
+                <el-menu-item
+                  v-for="(level3, i3) in level2.children"
+                  :key="i3"
+                  :index="i1 + i2 + i3"
+                >
+                  {{ level3.title }}
+                </el-menu-item>
+              </template>
+              <!-- <el-menu-item index="1-2">item two</el-menu-item> -->
+            </el-menu-item-group>
+          </template>
+          <template v-else> </template>
+
+          <!-- 
           <el-menu-item-group title="Group Two">
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-menu-item-group>
           <el-sub-menu index="1-4">
             <template #title><span>item four</span></template>
             <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
+          </el-sub-menu> -->
         </el-sub-menu>
-        <el-menu-item index="2">
+        <!-- <el-menu-item index="2">
           <el-icon><icon-menu /></el-icon>
           <template #title>Navigator Two</template>
         </el-menu-item>
@@ -48,20 +64,8 @@
         <el-menu-item index="4">
           <el-icon><setting /></el-icon>
           <template #title>Navigator Four</template>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu>
-
-      <!-- <ul class="nav-list">
-      <li
-        class="nav-item flex-center"
-        v-for="(nav, index) in navList"
-        :key="index"
-        :class="{ active: nav.isActive }"
-        @click="navClick(nav)"
-      >
-        {{ nav.name }}
-      </li>
-    </ul> -->
     </div>
   </aside>
 </template>
@@ -70,24 +74,25 @@
 import { defineComponent, reactive, toRefs, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-  Document,
-  Menu as IconMenu,
+  // Document,
+  // Menu as IconMenu,
   Location,
-  Setting,
+  // Setting,
   DArrowRight,
   DArrowLeft
 } from '@element-plus/icons-vue'
 
 // import * as ElIconModules from '@element-plus/icons-vue'
 import { NavItem } from '../common/types'
+import menuData from '@/common/data/menu.json'
 
 export default defineComponent({
   name: 'Nav',
   components: {
-    Document,
-    IconMenu,
+    // Document,
+    // IconMenu,
     Location,
-    Setting,
+    // Setting,
     DArrowRight,
     DArrowLeft
   },
@@ -152,6 +157,7 @@ export default defineComponent({
     })
 
     return {
+      menuData,
       ...toRefs(reactiveData)
     }
   }
