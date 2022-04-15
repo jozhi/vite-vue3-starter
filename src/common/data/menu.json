@@ -1,0 +1,34 @@
+[
+  {
+    "path": "/",
+    "name": "Home",
+    "title": "首页"
+  },
+  {
+    "name": "vuex",
+    "title": "二级菜单",
+    "children":[
+      {
+        "path": "/vuex",
+        "name": "vuex",
+        "title": "vuex通信页"
+      },
+      {
+        "name": "Axios",
+        "title": "三级菜单",
+        "children":[
+          {
+            "path": "/axios",
+            "name": "Axios",
+            "title": "Axios通信页"
+          },
+          {
+            "path": "/test",
+            "name": "Test",
+            "title": "Test测试页"
+          }
+        ]
+      }
+    ]
+  }
+]
