@@ -1,14 +1,12 @@
 <template>
   <main class="main-container">
-    <div class="top">
+    <div class="top" v-if="!onlyPage">
       <Header />
     </div>
 
     <div class="bottom">
-      <!-- <div class="navWrap">
-      </div> -->
-      <Nav />
-      <div class="right">
+      <Nav v-if="!onlyPage" />
+      <div class="right" :style="{ paddingTop: onlyPage ? '10px' : '0' }">
         <div class="content">
           <router-view />
         </div>
@@ -19,6 +17,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import getParam from '@/utils/tool'
+
 import Header from '@/components/Header.vue'
 import Nav from '@/components/Nav.vue'
 
@@ -27,6 +27,11 @@ export default defineComponent({
   components: {
     Header,
     Nav
+  },
+  setup() {
+    const onlyPage = getParam('onlyPage')
+    // console.log('getParam', getParam('onlyPage'))
+    return { onlyPage }
   }
 })
 </script>
@@ -68,7 +73,6 @@ $left-side-width = 200px
     height 100%
     display flex
     justify-content space-between
-    // height:
 
     // .navWrap{
     //   position relative
@@ -88,11 +92,10 @@ $left-side-width = 200px
     // }
 
     .right {
-      position relative
       width 100%
       height 100%
       box-sizing border-box
-      padding 0 10px 10px 10px
+      padding 0 10px 10px
 
       .content {
         position relative
