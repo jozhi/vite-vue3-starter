@@ -1,14 +1,13 @@
 <template>
-  <!-- <div class="navWrap"></div> -->
   <aside class="navWrap">
     <div class="navInner">
       <div class="navHend">左侧标题</div>
-      <div class="handShank">
-        <span v-show="isCollapse" @click="isCollapse = !isCollapse">
+      <div class="handShank" @click="isCollapse = !isCollapse">
+        <span v-show="isCollapse">
           <el-icon><DArrowRight /></el-icon>
         </span>
 
-        <span v-show="!isCollapse" @click="isCollapse = !isCollapse">
+        <span v-show="!isCollapse">
           <el-icon><DArrowLeft /></el-icon>
         </span>
       </div>
@@ -120,7 +119,6 @@ export default defineComponent({
           path: '/test'
         }
       ],
-
       navClick(e: NavItem) {
         router.push(e.path)
       },
@@ -204,18 +202,27 @@ export default defineComponent({
   .handShank{
     position absolute
     top 0
-    right -45px
-    // padding 0 5px
+    right: -20px;
+    padding-right 3px
+    border: 1px solid #e2e2e2;
+    border-left 0 none
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background: #fff;
+    cursor pointer
 
-    border 1px solid #d2d2d2
-    background #fff
+    &:hover{
+      border: 1px solid #ccc;
+      border-left 0 none
+    }
+
     span{
+      padding-top 6px
       display block
     }
   }
 
   .nav-list {
-
     .nav-item {
       box-sizing border-box
       // width 100%
@@ -229,10 +236,7 @@ export default defineComponent({
         font-weight bold
         background $second-background-color
       }
-
     }
-
   }
-
 }
 </style>
