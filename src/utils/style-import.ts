@@ -1,5 +1,6 @@
 import { App } from 'vue'
 import {
+  ElInput,
   ElIcon,
   ElLoading,
   ElCard,
@@ -11,6 +12,7 @@ import {
   ElSubMenu,
   ElMenuItemGroup,
   ElMenuItem,
+  ElRadio,
   ElRadioGroup,
   ElRadioButton
 } from 'element-plus'
@@ -22,6 +24,7 @@ import {
  */
 export default function styleImport(app: App) {
   ;[
+    ElInput,
     ElButton,
     ElCard,
     ElLoading,
@@ -33,6 +36,7 @@ export default function styleImport(app: App) {
     ElSubMenu,
     ElMenuItemGroup,
     ElMenuItem,
+    ElRadio,
     ElRadioGroup,
     ElRadioButton
   ].forEach((v) => {

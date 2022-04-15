@@ -5,9 +5,9 @@
     </div>
 
     <div class="bottom">
-      <div class="navWrap">
-        <Nav />
-      </div>
+      <!-- <div class="navWrap">
+      </div> -->
+      <Nav />
       <div class="right">
         <div class="content">
           <router-view />
@@ -70,13 +70,15 @@ $left-side-width = 200px
     justify-content space-between
     // height:
 
-    .navWrap{
-      width $left-side-width
-      // margin-right 10px
-      box-sizing: border-box
-      padding: 0 0 10px 10px
-      border-radius: 5px
-    }
+    // .navWrap{
+    //   position relative
+    //   z-index 2
+    //   width $left-side-width
+    //   // margin-right 10px
+    //   box-sizing: border-box
+    //   padding: 0 0 10px 10px
+    //   border-radius: 5px
+    // }
 
     // .left {
     //   position relative
