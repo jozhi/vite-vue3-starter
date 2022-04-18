@@ -13,58 +13,54 @@
       </div>
 
       <el-menu
-        default-active="2"
+        default-active="1-1"
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
         @open="handleOpen"
         @close="handleClose"
       >
-        <el-sub-menu v-for="(level1, i1) in menuData" :key="i1" :index="i1">
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>{{ level1.title }}</span>
-          </template>
+        <!-- 是否含有二级菜单 -->
+        <div v-for="(level1, i1) in menuData" :key="i1">
+          <el-sub-menu
+            v-if="level1.children && level1.children.length"
+            :index="`${i1}`"
+          >
+            <template #title>
+              <el-icon><location /></el-icon>
+              <span>{{ level1.title }}</span>
+            </template>
 
-          <template v-if="level1.children && level1.children.length">
-            <el-menu-item-group v-for="(level2, i2) in level1.children" :key="i1 + i2">
-              <template #title>
-                <span>{{ level2.title }}</span>
-              </template>
-              <template v-if="level2.children && level2.children.length">
+            <!-- 是否含有三级菜单 -->
+            <div v-for="(level2, i2) in level1.children" :key="i1 + i2">
+              <el-sub-menu
+                v-if="level2.children && level2.children.length"
+                :index="`${i1}-${i2}`"
+              >
+                <template #title>
+                  <span>{{ level2.title }}</span>
+                </template>
                 <el-menu-item
                   v-for="(level3, i3) in level2.children"
                   :key="i3"
-                  :index="i1 + i2 + i3"
+                  :index="`${i1}-${i2}-${i3}`"
+                  @click="navClick(level3)"
                 >
                   {{ level3.title }}
                 </el-menu-item>
-              </template>
-              <!-- <el-menu-item index="1-2">item two</el-menu-item> -->
-            </el-menu-item-group>
-          </template>
-          <template v-else> </template>
+              </el-sub-menu>
 
-          <!-- 
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title><span>item four</span></template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu> -->
-        </el-sub-menu>
-        <!-- <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
-          <template #title>Navigator Two</template>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon><document /></el-icon>
-          <template #title>Navigator Three</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
-          <template #title>Navigator Four</template>
-        </el-menu-item> -->
+              <el-menu-item-group v-else>
+                <el-menu-item :key="`${i1}-${i2}`" @click="navClick(level2)">
+                  {{ level2.title }}
+                </el-menu-item>
+              </el-menu-item-group>
+            </div>
+          </el-sub-menu>
+          <el-menu-item v-else @click="navClick(level1)" :index="`${i1}`">
+            <el-icon><location /></el-icon>
+            <template #title>{{ level1.title }}</template>
+          </el-menu-item>
+        </div>
       </el-menu>
     </div>
   </aside>
@@ -125,6 +121,7 @@ export default defineComponent({
         }
       ],
       navClick(e: NavItem) {
+        console.log('navClick e~', e)
         router.push(e.path)
       },
       handleOpen(key: string, keyPath: string[]) {
