@@ -13,7 +13,7 @@
     <ElPagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -42,7 +42,7 @@ export default defineComponent({
       handleCurrentChange(val: number) {
         console.log(`当前页: ${val}`)
       },
-      currentPage: '',
+      currentPage: 0,
       total: 999
     })
 
