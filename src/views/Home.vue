@@ -74,9 +74,6 @@ export default defineComponent({
 
 <style scoped lang="stylus">
 .home-container {
-  // .vue-element-plus-logo {
-  //   width 50%
-  // }
 
   #myEcharts{
     width 100%
