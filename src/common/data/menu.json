@@ -5,25 +5,25 @@
     "title": "首页"
   },
   {
-    "name": "vuex",
-    "title": "二级菜单",
+    "name": "VuexMenu",
+    "title": "二级菜单二级菜单",
     "children":[
       {
-        "path": "/vuex",
-        "name": "vuex",
-        "title": "vuex通信页"
+        "path": "/Vuex",
+        "name": "Vuex",
+        "title": "Vuex通信页"
       },
       {
-        "name": "Axios",
+        "name": "AxiosMenu",
         "title": "三级菜单",
         "children":[
           {
-            "path": "/axios",
+            "path": "/Axios",
             "name": "Axios",
             "title": "Axios通信页"
           },
           {
-            "path": "/test",
+            "path": "/Test",
             "name": "Test",
             "title": "Test测试页"
           }

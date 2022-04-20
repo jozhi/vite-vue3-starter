@@ -13,53 +13,65 @@
       </div>
 
       <el-menu
-        default-active="1-1"
-        class="el-menu-vertical-demo"
+        :default-active="defaultActive"
+        class="el-menu-vertical"
         :collapse="isCollapse"
         @open="handleOpen"
-        @close="handleClose"
+        ref="elMenu"
       >
         <!-- 是否含有二级菜单 -->
-        <div v-for="(level1, i1) in menuData" :key="i1">
+        <div v-for="(level1, i1) in menuData" :key="`${i1}`">
+          <!-- 无子级 -->
+          <el-menu-item
+            v-if="!level1.children || !level1.children.length"
+            @click="navClick(level1)"
+            :index="level1.name"
+          >
+            <el-icon><location /></el-icon>
+            <template #title>{{ level1.title }}</template>
+          </el-menu-item>
+          <!-- 有子级 -->
           <el-sub-menu
             v-if="level1.children && level1.children.length"
-            :index="`${i1}`"
+            :index="level1.name"
           >
             <template #title>
               <el-icon><location /></el-icon>
-              <span>{{ level1.title }}</span>
+              <span v-show="!isCollapse">{{ level1.title }}1</span>
             </template>
 
-            <!-- 是否含有三级菜单 -->
-            <div v-for="(level2, i2) in level1.children" :key="i1 + i2">
+            <!-- 三级菜单判断 -->
+            <template v-for="(level2, i2) in level1.children">
+              <!-- 无子级 -->
+              <el-menu-item-group
+                v-if="!level2.children || !level2.children.length"
+                :key="`${i1}-${i2}`"
+              >
+                <el-menu-item @click="navClick(level2)" :index="level2.name">
+                  {{ level2.title }}
+                </el-menu-item>
+              </el-menu-item-group>
+
+              <!-- 有子级 -->
               <el-sub-menu
                 v-if="level2.children && level2.children.length"
-                :index="`${i1}-${i2}`"
+                :index="level2.name"
+                :key="`${i1}-${i2}`"
               >
                 <template #title>
                   <span>{{ level2.title }}</span>
                 </template>
                 <el-menu-item
                   v-for="(level3, i3) in level2.children"
-                  :key="i3"
-                  :index="`${i1}-${i2}-${i3}`"
+                  :key="`${i1}-${i2}-${i3}`"
+                  :index="level3.name"
                   @click="navClick(level3)"
                 >
                   {{ level3.title }}
                 </el-menu-item>
               </el-sub-menu>
-
-              <el-menu-item-group v-else>
-                <el-menu-item :key="`${i1}-${i2}`" @click="navClick(level2)">
-                  {{ level2.title }}
-                </el-menu-item>
-              </el-menu-item-group>
-            </div>
+            </template>
           </el-sub-menu>
-          <el-menu-item v-else @click="navClick(level1)" :index="`${i1}`">
-            <el-icon><location /></el-icon>
-            <template #title>{{ level1.title }}</template>
-          </el-menu-item>
         </div>
       </el-menu>
     </div>
@@ -67,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, watch } from 'vue'
+import { defineComponent, reactive, toRefs, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   // Document,
@@ -98,46 +110,19 @@ export default defineComponent({
 
     const reactiveData = reactive({
       isCollapse: false,
-      navList: [
-        {
-          name: 'Home',
-          isActive: false,
-          path: '/'
-        },
-        {
-          name: 'Vuex',
-          isActive: false,
-          path: '/vuex'
-        },
-        {
-          name: 'Axios',
-          isActive: false,
-          path: '/axios'
-        },
-        {
-          name: 'Test',
-          isActive: false,
-          path: '/test'
-        }
-      ],
+      defaultActive: 'Vuex',
       navClick(e: NavItem) {
-        console.log('navClick e~', e)
+        // console.log('navClick e~', e)
         router.push(e.path)
       },
       handleOpen(key: string, keyPath: string[]) {
-        console.log(key, keyPath)
-      },
-      handleClose(key: string, keyPath: string[]) {
         console.log(key, keyPath)
       }
     })
 
     const changeNavActive = (currentPath: string) => {
-      reactiveData.navList.forEach((v: NavItem) => {
-        const temp = v
-        temp.isActive = temp.path === currentPath
-        return temp
-      })
+      // console.log('currentPath::', currentPath)
+      reactiveData.defaultActive = currentPath.replaceAll('/', '')
     }
 
     watch(
@@ -147,11 +132,11 @@ export default defineComponent({
       }
     )
 
-    onMounted(() => {
-      router.isReady().then(() => {
-        changeNavActive(router.currentRoute.value.path)
-      })
-    })
+    // onMounted(() => {
+    //   router.isReady().then(() => {
+    //     changeNavActive(router.currentRoute.value.path)
+    //   })
+    // })
 
     return {
       menuData,
@@ -161,8 +146,19 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+// 左侧栏折叠 bug 修复
+.el-menu-vertical{
+  /deep/>.el-sub-menu{
+    &.el-menu--collapse{
+      .el-sub-menu .el-sub-menu__icon-arrow{
+        display none
+      }
+    }
+  }
+</style>
 
+<style scoped lang="stylus">
 @import "../style/basic.styl"
 
 .navWrap {
@@ -178,29 +174,12 @@ export default defineComponent({
     border-radius: 3px
   }
 
-  .el-menu-vertical-demo{
-    /deep/>.el-sub-menu{
-      >.el-sub-menu__title{
-        padding-right 30px
-        .el-sub-menu__icon-arrow{
-          right 15px
-        }
-      }
-      &.is-opened{
-        >.el-sub-menu__title{
-          padding-right 0
-        }
-      }
-      .el-menu-item{
-        min-width: 185px;
-      }
-    }
-  }
 
   .navHend{
     height 50px
     line-height 50px
     text-align center
+    font-size 14px
   }
   .handShank{
     position absolute
@@ -222,23 +201,6 @@ export default defineComponent({
     span{
       padding-top 6px
       display block
-    }
-  }
-
-  .nav-list {
-    .nav-item {
-      box-sizing border-box
-      // width 100%
-      padding 0 10px
-      height 60px
-      line-height 60px
-      cursor pointer
-      // display inline-block
-
-      &.active {
-        font-weight bold
-        background $second-background-color
-      }
     }
   }
 }

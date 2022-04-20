@@ -10,17 +10,17 @@ const routes: Array<RouteRecordRaw> = [
     component: Home
   },
   {
-    path: '/vuex',
+    path: '/Vuex',
     name: 'Vuex',
     component: Vuex
   },
   {
-    path: '/axios',
+    path: '/Axios',
     name: 'Axios',
     component: () => import('@/views/Axios.vue') // 懒加载 Axios 组件
   },
   {
-    path: '/test',
+    path: '/Test',
     name: 'Test',
     component: Test
   }
