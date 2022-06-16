@@ -50,12 +50,13 @@ $left-side-width = 200px
   // top 0
   // bottom 0
   // width 100%
+  // overflow hidden
   height 100%
-  background $second-background-color
   box-sizing border-box
   display flex
   flex-direction column
   justify-content space-between
+  background $second-background-color
 
   .top {
     position relative
@@ -70,9 +71,9 @@ $left-side-width = 200px
     position relative
     box-sizing border-box
     width 100%
-    height 100%
     display flex
     justify-content space-between
+    height calc(100% - 70px)
 
     // .navWrap{
     //   position relative
@@ -96,6 +97,7 @@ $left-side-width = 200px
       height 100%
       box-sizing border-box
       padding 0 10px 10px
+      // overflow-y auto
 
       .content {
         position relative
@@ -105,6 +107,7 @@ $left-side-width = 200px
         border-radius 5px
         box-sizing border-box
         padding 10px
+        overflow auto
       }
     }
   }

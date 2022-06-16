@@ -33,7 +33,7 @@
       </span>
     </div>
 
-    <div class="contPart">
+    <div class="contPart clearfix">
       <div
         v-for="op in itemPart"
         :key="op.id"
@@ -115,7 +115,7 @@ export default defineComponent({
       },
       listPage: {
         pageNum: '1', // 当前页码
-        pageSize: '10' // 每页数据数
+        pageSize: '9999' // 每页数据数
       },
       createForm: {
         name: '',
@@ -132,14 +132,10 @@ export default defineComponent({
       }
 
       Object.keys(params).forEach((key) => {
-        if (params[key]) {
+        if (!params[key]) {
           delete params[key]
         }
       })
-      // type T = keyof typeof params
-      // for (const op in params) {
-      //   !params[op] && delete params[op]
-      // }
 
       axios.post('/application/list', params).then((res) => {
         if (res.data.success) {
@@ -189,6 +185,7 @@ export default defineComponent({
 
 <style scoped lang="stylus">
 // .appManagePage{}
+
 .titlePart {
   padding-bottom: 12px;
   margin-bottom: 20px;
@@ -202,8 +199,9 @@ export default defineComponent({
     text-align: right;
   }
 }
+
 .contPart {
-  margin-bottom: 10px;
+
   .itemPart {
     position: relative;
     float: left;
@@ -227,6 +225,8 @@ export default defineComponent({
         border: 1px solid #eee;
         line-height: 1;
         padding: 3px;
+        text-decoration none
+        font-size 14px
       }
     }
 
@@ -236,11 +236,13 @@ export default defineComponent({
       box-shadow: 1px 1px 15px #e2e2e2;
     }
     .h2 {
+      padding-top 40px
       height: 140px;
       font-size: 20px;
       color: #fff;
       text-align: center;
       background-color: #575878;
+      box-sizing: border-box
       i{
         margin-top: 20px;
         font-size: 60px;
