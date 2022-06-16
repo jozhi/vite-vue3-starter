@@ -1,5 +1,5 @@
 <template>
-  <div class="AppManage">
+  <div class="appManagePage">
     <div class="titlePart cf">
       <el-input
         class="elInput"
@@ -32,6 +32,7 @@
         >
       </span>
     </div>
+
     <div class="contPart">
       <div
         v-for="op in itemPart"
@@ -186,7 +187,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="stylus">
-// .AppManage{}
+// .appManagePage{}
 .titlePart {
   padding-bottom: 12px;
   margin-bottom: 20px;
