@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <el-dialog title="应用基本信息" :visible.sync="dialogVisible" width="600px">
+    <el-dialog title="应用基本信息" v-model="dialogVisible" width="600px">
       <div class="appBasicInfo">
         <el-form :model="createForm" ref="appBasicInfo" label-width="100px">
           <el-form-item label="应用名称" prop="name">
@@ -180,7 +180,8 @@ export default defineComponent({
       ...toRefs(reactiveData),
       formSave,
       itemPartClick,
-      itemRelease
+      itemRelease,
+      queryList
     }
   }
 })

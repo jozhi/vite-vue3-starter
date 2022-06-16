@@ -1,5 +1,10 @@
 import { App } from 'vue'
 import {
+  ElOption,
+  ElSelect,
+  ElFormItem,
+  ElForm,
+  ElDialog,
   ElInput,
   ElIcon,
   ElLoading,
@@ -24,6 +29,11 @@ import {
  */
 export default function styleImport(app: App) {
   ;[
+    ElOption,
+    ElSelect,
+    ElFormItem,
+    ElForm,
+    ElDialog,
     ElInput,
     ElButton,
     ElCard,
