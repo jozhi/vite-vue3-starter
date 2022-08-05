@@ -26,16 +26,16 @@ export default defineConfig({
     port: 4500, // 设置服务启动端口号
     open: true, // 设置服务启动时是否自动打开浏览器
     cors: true, // 允许跨域
-    host: '0.0.0.0'
+    host: '0.0.0.0',
 
     // 设置代理，根据我们项目实际情况配置
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://xxx.xxx.xxx.xxx:x000',
-    //     changeOrigin: true,
-    //     secure: false,
-    //     rewrite: (path) => path.replace('/api/', '/')
-    //   }
-    // },
+    proxy: {
+      '/insiis': {
+        target: 'http://10.85.128.84:8000',
+        changeOrigin: true
+        // secure: false
+        // rewrite: (path) => path.replace('/', '/')
+      }
+    }
   }
 })

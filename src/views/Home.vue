@@ -1,83 +1,81 @@
 <template>
-  <div class="home-container page-container">
-    <van-button type="primary">主要按钮</van-button>
+  <div class="home-container">
+    <div class="title">业务信息</div>
+    <div class="cont">
+      <iframe
+        class="iframe"
+        src="http://10.87.0.21:18585/sbtz/insiis/snapshot/download?logId=1093190"
+        frameborder="0"
+      ></iframe>
 
-    <!-- <img class="vue-element-plus-logo" alt="Vue logo" src="../assets/logo.png" /> -->
-    <!-- <div class="page-title">Vite2.x + Vue3.x + TypeScript + Element Plus</div> -->
-    <div id="myEcharts"></div>
+      <!-- src="http://10.87.0.21:18585/sbtz/insiis/snapshot/download?logId=1093190" -->
+      <!-- src="http://10.85.128.84:8000/sbtz/insiis/snapshot/download?logId=1093190" -->
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted } from 'vue'
+import { defineComponent, toRefs, reactive } from 'vue'
 
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+import { useRoute } from 'vue-router'
+import axios from '../utils/axios'
 
 export default defineComponent({
   name: 'Home',
   setup() {
-    /// 声明定义一下echart
-    const echart = echarts
+    const route = useRoute() // 第一步
+    const { ticket, projid } = route.query
 
-    // 基础配置一下Echarts
-    function initChart() {
-      const chart = echart.init(document.getElementById('myEcharts')!, 'dark')
-      // 把配置和数据放这里
-      chart.setOption({
-        xAxis: {
-          type: 'category',
-          data: [
-            '一月',
-            '二月',
-            '三月',
-            '四月',
-            '五月',
-            '六月',
-            '七月',
-            '八月',
-            '九月',
-            '十月',
-            '十一月',
-            '十二月'
-          ]
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            data: [820, 932, 901, 934, 1290, 1330, 1320, 801, 102, 230, 4321, 4129],
-            type: 'line',
-            smooth: true
+    const reactiveData = reactive({
+      srcBase: `${window.location.origin}/sbtz/insiis/snapshot/download?logId=`,
+      iframeSrc: '',
+      opsenoTZ: '',
+      shList: []
+    })
+
+    if (ticket && projid) {
+      axios
+        .get('/sys/common/NewYthInfo', {
+          params: {
+            ticket: ticket || '3af6414a1ad941f9b1ddf9690d5b1fb0',
+            projid: projid || 'fe3f11cb7f35412db3fc45f123fccb62'
           }
-        ]
-      })
+        })
+        .then((res: any) => {
+          if (res) {
+            console.log('res,,', res)
+            reactiveData.iframeSrc = `${window.location.origin}/sbtz/insiis/snapshot/download?logId=`
 
-      window.onresize = () => {
-        // 自适应大小
-        chart.resize()
-      }
+            if (res.result.kzlist) {
+              reactiveData.opsenoTZ = res.result.kzlist
+            }
+          }
+        })
     }
 
-    onMounted(() => {
-      initChart()
-    })
-    onUnmounted(() => {
-      // eslint-disable-next-line no-unused-expressions
-      echart.dispose
-    })
-    return { initChart }
+    return {
+      ...toRefs(reactiveData)
+    }
   }
 })
 </script>
 
 <style scoped lang="stylus">
 .home-container {
+  padding-top 10px
+  background-color #fff
 
-  #myEcharts{
+  .title{
+    text-align left
+    font-size 18px
+    line-height 1.4
+    padding-left 10px
+    margin 0 10px 10px
+    font-weight bold
+    border-left 3px solid #3f90e2
+  }
+  .iframe{
     width 100%
     height 500px
   }

@@ -34,6 +34,7 @@ $top-height = 60px
 $left-side-width = 80px
 
 .main-container {
+  margin 0 auto
   // position absolute
   // left 0
   // right 0
