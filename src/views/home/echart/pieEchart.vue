@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <div>main</div>
     <div id="chart" class="chart"></div>
   </div>
 </template>
