@@ -1,22 +1,18 @@
 <template>
   <main class="main-container">
-    <div class="top">
-      <Header />
-    </div>
-    <div class="body">
-      <router-view />
-    </div>
+    <!-- <div class="top"> <Header /> </div> -->
+    <router-view />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Header from '@/components/Header.vue'
+// import Header from '@/components/Header.vue'
 
 export default defineComponent({
   name: 'Main',
   components: {
-    Header
+    // Header
   }
 })
 </script>
@@ -42,13 +38,13 @@ $left-side-width = 80px
   flex-direction column
   justify-content space-between
 
-  .top {
-    position relative
-    box-sizing border-box
-    width 100%
-    height $top-height
-    margin-bottom 10px
-  }
+  // .top {
+  //   position relative
+  //   box-sizing border-box
+  //   width 100%
+  //   height $top-height
+  //   margin-bottom 10px
+  // }
 
   .body {
     position relative

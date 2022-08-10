@@ -17,19 +17,19 @@ export default defineComponent({
     echart
   },
   setup() {
-    // onMounted(() => {
-    //   resetScreenSize()
-    // })
-    // const reactiveData = reactive({})
-    // return {
-    //   ...toRefs(reactiveData)
-    // }
+    onMounted(() => {
+      // resetScreenSize()
+    })
+    const reactiveData = reactive({})
+    return {
+      ...toRefs(reactiveData)
+    }
   }
 })
 </script>
 
 <style lang="stylus">
 .main{
-  width 1000px;
+  width 920px;
 }
 </style>

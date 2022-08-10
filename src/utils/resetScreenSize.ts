@@ -20,4 +20,5 @@ const resetScreenSize = (width = 1920, height = 1080, timer = 600) => {
   init()
 }
 // export default resetScreenSize
+// eslint-disable-next-line import/prefer-default-export
 export { resetScreenSize }

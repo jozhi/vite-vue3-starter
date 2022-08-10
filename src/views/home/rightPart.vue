@@ -8,6 +8,6 @@ export default {}
 
 <style lang="stylus">
 .right {
-  width: 420px;
+  width: 800px;
 }
 </style>
